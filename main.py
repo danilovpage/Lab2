@@ -80,3 +80,27 @@ class Validator:
         if len(snils) != 11:
             return False
         return True
+
+    def check_passport_number(passport_number : int) -> bool:
+        if passport_number != 6:
+            return False
+        return True
+
+    def check_string(string) -> str:
+        if type(string) != str:
+            return False
+        return True
+
+    def check_age(age : int) -> bool:
+        if type(age) == int:
+            if age < 100:
+                return True
+        return False
+
+    def check_address(address : str) -> bool:
+        pattern = '[а-яА-Я.\s\d-]+\s+[0-9]+$'
+        if type(address) == str:
+            if re.match(pattern, address):
+                return True
+        return False
+
