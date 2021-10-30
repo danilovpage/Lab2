@@ -82,22 +82,78 @@ class Validator:
         return True
 
     def check_passport_number(passport_number : int) -> bool:
+        """
+        Выполняет проверку номера паспорта на корректность
+        Если номер паспорта состоит не из 6 цифр то возвращается False
+
+            Parameters
+            ----------
+                passport_number : int
+                  Параметр для проверки
+
+            Returns
+            -------
+                bool:
+                    Булевый результат проверки на корректность
+        """
         if passport_number != 6:
             return False
         return True
 
     def check_string(string) -> str:
+        """
+        Выполняет проверку типа данных параметра
+        Если пераметр не имеет тип данных str возвращено False
+
+            Parameters
+            ----------
+                string : str
+                  Параметр для проверки типа данных
+
+            Returns
+            -------
+                bool:
+                    Булевый результат проверки на корректность
+        """
         if type(string) != str:
             return False
         return True
 
     def check_age(age : int) -> bool:
+        """
+        Выполняет проверку возраста на корректность
+        Если возраст превышает отметку в 100 то возвращается False
+
+            Parameters
+            ----------
+                age : int
+                  Параметр для проверки
+
+            Returns
+            -------
+                bool:
+                    Булевый результат проверки на корректность
+        """
         if type(age) == int:
             if age < 100:
                 return True
         return False
 
     def check_address(address : str) -> bool:
+        """
+        Выполняет проверку корректности адреса
+        Если адрес не является строкой или указан не в формате "улица пробел номер дома" то возвращено False
+
+            Parameters
+            ----------
+                address : str
+                  Параметр для проверки
+
+            Returns
+            -------
+                bool:
+                    Булевый результат проверки на корректность
+        """
         pattern = '[а-яА-Я.\s\d-]+\s+[0-9]+$'
         if type(address) == str:
             if re.match(pattern, address):
