@@ -58,7 +58,25 @@ class Validator:
               Булевый результат проверки на корректность
         """
 
-        pattern = '[1-130]'
         if int(weight) < 130:
             return True
         return False
+
+    def check_snils(snils : str)-> bool:
+        """
+        Выполняет проверку номера снилса на корректность
+        Если номер снилса не содержит 11 цифр то возвращается False
+
+        Parameters
+        ----------
+            snils : str
+              Строка для проверки
+
+        Returns
+        -------
+            bool:
+              Булевый результат проверки на корректность
+        """
+        if len(snils) != 11:
+            return False
+        return True
