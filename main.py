@@ -1,12 +1,11 @@
 import re
 from tqdm import tqdm
-import time
 import argparse
 import json
 
 parser = argparse.ArgumentParser()
-parser.add_argument("input", help='Get path file input')
-parser.add_argument("output", help='Get path file output')
+parser.add_argument("input", help='Введите путь к файлу с данными для обработки')
+parser.add_argument("output", help='Введите путь куда сохранить обработанные данные')
 args = parser.parse_args()
 
 
@@ -56,9 +55,9 @@ class Validator:
             bool:
               Булевый результат проверки на корректность
         """
-
-        if int(weight) < 130:
-            return True
+        if type(weight) == int:
+            if weight < 130:
+                return True
         return False
 
     def check_snils(snils: str) -> bool:
@@ -95,11 +94,13 @@ class Validator:
                 bool:
                     Булевый результат проверки на корректность
         """
-        if passport_number != 6:
+
+        a = f'{passport_number}'
+        if len(a) != 6:
             return False
         return True
 
-    def check_string(string) -> str:
+    def check_string(string) -> bool:
         """
         Выполняет проверку типа данных параметра
         Если пераметр не имеет тип данных str возвращено False
@@ -210,4 +211,23 @@ with tqdm(total=len(data)) as progressbar:
             true_data.append(person)
         progressbar.update(1)
 
+# запись валидных данных в новый файл
+out_put = open(args.output, 'w', encoding='utf-8')
+result_data = json.dumps(true_data, ensure_ascii=False, indent=4)
+out_put.write(result_data)
+out_put.close()
 
+print("Число валидных записей: ", len(true_data))
+print("Число невалидных записей:", len(data)-len(true_data))
+print("\nСтатистика невалидных записей по типам ошибок: ")
+print("Email: ", email)
+print("Weight: ", weight)
+print("Snils: ", snils)
+print("Passport number: ", passport_number)
+print("University: ", university)
+print("Age: ", age)
+print("Political view: ", political_views)
+print("Worldview: ", worldview)
+print("Address: ", addsress)
+
+# python main.py D:\\73.txt D:\\test.txt
